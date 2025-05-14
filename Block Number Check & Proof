@@ -1,0 +1,16 @@
+##Step 1: Get Block Number
+curl -s -X POST -H 'Content-Type: application/json' \
+-d '{"jsonrpc":"2.0","method":"node_getL2Tips","params":[],"id":67}' \
+http://localhost:8080 | jq -r ".result.proven.number"
+echo $BLOCK
+
+##save this block number for the next steps
+##example output: 42015
+
+
+Step 2: Generate Block Proof
+curl -s -X POST -H 'Content-Type: application/json' \
+-d '{"jsonrpc":"2.0","method":"node_getArchiveSiblingPath","params":["BLOCK_NUMBER","BLOCK_NUMBER"],"id":67}' \
+http://localhost:8080 | jq -r ".result"
+
+##just replace your block number in "BLOCK NUMBER","BLOCK NUMBER"
